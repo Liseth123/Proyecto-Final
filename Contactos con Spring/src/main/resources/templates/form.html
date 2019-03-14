@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}">Insert title here</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" />
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-md navbar-dark bg-info">
+		<a class="navbar-brand" href="#">Spring Boot</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+				<li class="nav-item"><a class="nav-link" href="#about"
+					th:href="@{/listar}">Contacto</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container">
+		<h1 th:text="${titulo}"
+			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"></h1>
+			
+		<div th:object="${contacto}" th:remove="tag">
+			<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger"
+				role="alert">
+				<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+			</ul>
+		</div>
+		
+		<form th:action="@{/form}" th:object="${contacto}" method="post">
+			<div class="form-group row">
+				<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{nombre}" class="form-control" th:errorclass="'form-control alert-danger'"/>
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="telefonoPersonal" class="col-sm-2 col-form-label">Telefono Personal</label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{telefonoPersonal}" class="form-control" th:errorclass="'form-control alert-danger'" />
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('telefonoPersonal')}" th:errors="*{telefonoPersonal}"></small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="telefonoOficina" class="col-sm-2 col-form-label">Telefono Oficina</label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{telefonoOficina}" class="form-control" th:errorclass="'form-control alert-danger'" />
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('telefonoOficina')}" th:errors="*{telefonoOficina}"></small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="correoPersonal" class="col-sm-2 col-form-label">Correo Personal</label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{correoPersonal}" class="form-control" th:errorclass="'form-control alert-danger'" />
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('correoPersonal')}" th:errors="*{correoPersonal}"></small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="correoOficina" class="col-sm-2 col-form-label">Correo Oficina</label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{correoOficina}" class="form-control" th:errorclass="'form-control alert-danger'" />
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('correoOficina')}" th:errors="*{correoOficina}"></small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="createAt" class="col-sm-2 col-form-label">Fecha de cumpleaños</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" th:field="*{createAt}" th:errorclass="'form-control alert-danger'" />
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}"></small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-6">
+					<input type="submit" value="Crear Contacto" class="btn btn-primary" />
+				</div>
+			</div>
+		</form>
+	</div>
+	<footer class="page-footer font-small blue">
+  <div class="footer-copyright text-center py-3">© 2019 Copyright:
+    <a href="https://mdbootstrap.com/education/bootstrap/"> Curiel Martinez Liseth</a>
+  </div>
+</footer>
+</body>
+</html>
